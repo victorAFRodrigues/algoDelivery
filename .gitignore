@@ -1,0 +1,104 @@
+############################################
+# .NET / ASP.NET Core
+############################################
+
+# Build results
+bin/
+obj/
+out/
+artifacts/
+
+# Keep bin/obj inside source folders if needed (opcional)
+!**/src/**/bin/
+!**/src/**/obj/
+
+# .NET publish output
+publish/
+
+# Test results
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Logs
+*.log
+
+############################################
+# Visual Studio
+############################################
+
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.cache
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+
+# Visual Studio Code (editor only)
+.vscode/
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+
+############################################
+# JetBrains Rider / IntelliJ-like
+############################################
+
+.idea/
+*.sln.iml
+*.DotSettings.user
+_ReSharper*/
+*.resharper
+
+############################################
+# OS / Misc
+############################################
+
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+############################################
+# NuGet
+############################################
+
+# Packages restored via NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# NuGet v3 cache (local machine)
+.nuget/
+
+############################################
+# Docker
+############################################
+
+# Docker override files
+docker-compose.override.yml
+
+############################################
+# Environment / Secrets
+############################################
+
+appsettings.Development.json
+appsettings.Local.json
+.env
+.env.*
+
+############################################
+# Temporary files
+############################################
+
+*.tmp
+*.temp
+*.bak
+*.swp
