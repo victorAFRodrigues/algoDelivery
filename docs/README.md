@@ -123,92 +123,62 @@ docker compose up -d
   - Email: dba@algadelivery.com
   - Senha: algadelivery
 
-📨 Comunicação entre Serviços (Kafka)
+### 📨 Comunicação entre Serviços (Kafka)
 
 Os microserviços se comunicam via eventos de domínio, publicados no Kafka.
 
-Padrões adotados:
-
-Event-driven architecture
-
-Consumer Groups
-
-Mensagens imutáveis
-
-Idempotência
-
-At-least-once delivery
-
-Dead Letter Topics (DLT)
+#### Padrões adotados:
+- Event-driven architecture
+- Consumer Groups
+- Mensagens imutáveis
+- Idempotência
+- At-least-once delivery
+- Dead Letter Topics (DLT)
 
 📌 Nenhum microserviço acessa o banco de outro.
 
-🔐 Configuração & Secrets
+### 🔐 Configuração & Secrets
+- `appsettings.json` → versionado
+- `appsettings.Development.json` → não versionado
+- Variáveis de ambiente → Docker / Kubernetes
 
-appsettings.json → versionado
+### 🧪 Testes
+- Testes unitários no Domain
+- Testes de Application (use cases)
+- Infra mockada para isolamento
 
-appsettings.Development.json → não versionado
+### 🚀 Tecnologias Utilizadas
+- .NET 10
+- ASP.NET Core
+- Entity Framework Core
+- PostgreSQL
+- Kafka
+- Docker / Docker Compose
+- Clean Architecture
+- Domain-Driven Design (DDD)
 
-Variáveis de ambiente → Docker / Kubernetes
+### ⚠️ Princípios Importantes
+- Microserviços não compartilham banco
+- Cada .sln é independente
+- Deploy independente por serviço
+- Comunicação síncrona evitada
+- Bounded Contexts bem definidos
 
-🧪 Testes
+### 🧭 Próximos Passos
+- Adicionar Kafka ao docker-compose
+- Versionar eventos
+- Implementar Outbox Pattern
+- Observabilidade (OpenTelemetry)
+- CI/CD
+- Kubernetes
 
-Testes unitários no Domain
-
-Testes de Application (use cases)
-
-Infra mockada para isolamento
-
-🚀 Tecnologias Utilizadas
-
-.NET 8+
-
-ASP.NET Core
-
-Entity Framework Core
-
-PostgreSQL
-
-Kafka
-
-Docker / Docker Compose
-
-Clean Architecture
-
-Domain-Driven Design (DDD)
-
-⚠️ Princípios Importantes
-
-Microserviços não compartilham banco
-
-Cada .sln é independente
-
-Deploy independente por serviço
-
-Comunicação síncrona evitada
-
-Bounded Contexts bem definidos
-
-🧭 Próximos Passos
-
-Adicionar Kafka ao docker-compose
-
-Versionar eventos
-
-Implementar Outbox Pattern
-
-Observabilidade (OpenTelemetry)
-
-CI/CD
-
-Kubernetes
-
-📘 Documentação
-
-Documentação adicional pode ser encontrada em:
-
-Docs/README.md
-
-👨‍💻 Sobre o Projeto
-
+### 📘 Documentação
 Este projeto foi criado com foco em boas práticas de arquitetura, aprendizado contínuo e aplicação real de conceitos avançados em .NET e microserviços.
+Toda documentação adicional pode ser encontrada em:
+
+```
+docs/
+├── README.md
+├── CourierManagement/
+└── DeliveryTracking/
+```
