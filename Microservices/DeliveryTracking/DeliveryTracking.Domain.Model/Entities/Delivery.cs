@@ -23,26 +23,14 @@ public class Delivery
     public IReadOnlyCollection<Item> Items => _items.AsReadOnly();
     private Delivery(){}
     
-    public Delivery(
-        DeliveryStatus status,  Guid courierId, DateTimeOffset placedAt,  DateTimeOffset assignedAt, 
-        DateTimeOffset expectedDeliveryAt, DateTimeOffset fulfilledAt,decimal distanceFee, decimal courierPayout,  
-        decimal totalCost, int totalItems, ContactPoint sender, ContactPoint receiver, List<Item>? items = null
-        )
+    public Delivery( DeliveryStatus status, decimal distanceFee, decimal courierPayout,  decimal totalCost, int totalItems )
     {
         Id = Guid.NewGuid();
         Status =  status;
-        CourierId = courierId;
-        PlacedAt = placedAt;
-        AssignedAt = assignedAt;
-        ExpectedDeliveryAt = expectedDeliveryAt;
-        FulfilledAt = fulfilledAt;
         DistanceFee = distanceFee;
         CourierPayout = courierPayout;
         TotalCost = totalCost;
         TotalItems = totalItems;
-        Sender = sender;
-        Receiver = receiver;
-        Items = items ?? new List<Item>();
     }
 
     public void AddItem(string name, int quantity)
@@ -57,9 +45,15 @@ public class Delivery
     public void PickUp(Guid courierId){}
     public void MarkAsDelivered(){}
 
-    public Delivery Draft()
+    public static Delivery Draft()
     {
-        return new();
+        return new (
+            DeliveryStatus.Draft,
+            0m,
+            0m,
+            0m,
+            0
+        );
     }
     
 }
