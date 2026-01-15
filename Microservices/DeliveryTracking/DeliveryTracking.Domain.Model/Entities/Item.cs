@@ -14,4 +14,17 @@ public class Item
         Name = name;
         Quantity = quantity;
     }
+
+    public static Item BrandNew(string name, int quantity)
+    {
+        return new Item(name, quantity);
+    }
+    public void ChangeQuantity(int quantity)
+    {
+        if (quantity <= 0)
+            throw new InvalidOperationException("Quantity must be greater than zero");
+
+        Quantity = quantity;
+    }
+
 }
