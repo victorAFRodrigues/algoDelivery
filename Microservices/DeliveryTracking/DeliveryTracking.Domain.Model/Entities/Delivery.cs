@@ -67,7 +67,7 @@ public class Delivery
         Receiver = details.Receiver;
         DistanceFee = details.DistanceFee;
         CourierPayout = details.CourierPayout;
-        ExpectedDeliveryAt = DateTimeOffset.UtcNow.Add(details.ExpectedDeliveryTime);
+        ExpectedDeliveryAt = DateTimeOffset.UtcNow.Add(details.ExpectedDeliveryTime); 
         TotalCost = DistanceFee + details.CourierPayout;
     }
     public void PickUp(Guid courierId)
