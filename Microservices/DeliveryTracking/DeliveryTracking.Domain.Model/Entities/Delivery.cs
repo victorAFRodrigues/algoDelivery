@@ -18,8 +18,9 @@ public class Delivery
     public decimal TotalCost { get; private set; }
     public int TotalItems { get; private set; }
     
-    public ContactPoint Sender { get; private set; }
-    public ContactPoint Recipient { get; private set; }
+    public ContactPoint? Sender { get; private set; }
+    public ContactPoint? Recipient { get; private set; }
+    
     private readonly List<Item> _items = new();
     public IReadOnlyCollection<Item> Items => _items.AsReadOnly();
     private Delivery(){}
@@ -33,7 +34,7 @@ public class Delivery
         TotalCost = totalCost;
         TotalItems = _items.Count;
     }
-
+    //Metodos responsaveis pela mudança de estado dos itens 
     public Guid AddItem(string name, int quantity)
     {
         Item item = Item.BrandNew(name, quantity);
@@ -57,15 +58,8 @@ public class Delivery
         if (item is null) throw new InvalidOperationException("Item not found");
         item.ChangeQuantity(quantity);
     }
-    public void Place()
-    {
-        Status = DeliveryStatus.WaitingForCourier;
-        PlacedAt = DateTimeOffset.Now;
-    }
-    public void EditPreparationDetails(
-        PreparationDetails details,
-        DateTimeOffset now
-    )
+    // Lida com a edição dos detalhes de preparação
+    public void EditPreparationDetails(PreparationDetails details)
     {
         VerifyIfCanBeEdited();
 
@@ -73,14 +67,17 @@ public class Delivery
         Recipient = details.Recipient;
         DistanceFee = details.DistanceFee;
         CourierPayout = details.CourierPayout;
-<<<<<<< HEAD
+
         ExpectedDeliveryAt = DateTimeOffset.UtcNow.Add(details.ExpectedDeliveryTime); 
         TotalCost = DistanceFee + details.CourierPayout;
-=======
-
-        ExpectedDeliveryAt = now + details.ExpectedDeliveryTime;
-        TotalCost = DistanceFee + CourierPayout;
->>>>>>> c1411e787a5580ebb4ce444e3d23fe7205180d2a
+    }
+    
+    //Metodos de mudança de estado do DeliveryStatus
+    public void Place()
+    {
+        VerifyIfCanBePlaced();
+        Status = DeliveryStatus.WaitingForCourier;
+        PlacedAt = DateTimeOffset.Now;
     }
     public void PickUp(Guid courierId)
     {
@@ -94,7 +91,6 @@ public class Delivery
         Status = DeliveryStatus.Delivered;
         FulfilledAt = DateTimeOffset.Now;
     }
-
     public static Delivery Draft()
     {
         return new (
@@ -104,34 +100,24 @@ public class Delivery
             0m
         );
     }
-
-    public class PreparationDetails
-    {
-        public ContactPoint Sender { get; private set; }
-        public ContactPoint Recipient { get; private set; }
-        public decimal DistanceFee { get; private set; }
-        public decimal CourierPayout { get; private set; }
-        public TimeSpan ExpectedDeliveryTime { get; private set; }
-        
-    }
     
+    //Tratamentos de erro
     private void VerifyIfCanBePlaced() {
         if (!IsFilled()) {
-            throw new DomainException();
+            throw new DomainException("There is missing information. Please verify and try again");
         }
         if (!Status.Equals(DeliveryStatus.Draft)) {
             throw new DomainException();
         }
     }
-
     private void VerifyIfCanBeEdited() {
         if (!Status.Equals(DeliveryStatus.Draft)) {
             throw new DomainException();
         }
     }
-
-    private bool IsFilled() {
-        return Sender && Recipient && TotalCost > 0;
+    private bool IsFilled()
+    {
+        return Sender is not null && Recipient is not null && TotalCost > 0;
     }
     
 }

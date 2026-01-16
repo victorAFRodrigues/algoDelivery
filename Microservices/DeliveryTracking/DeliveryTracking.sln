@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryTracking.Domain.Model", "DeliveryTracking.Domain.Model\DeliveryTracking.Domain.Model.csproj", "{EB2BB19D-5B7A-4B61-BE13-EFC900DFDE99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryTracking.UnitTests", "DeliveryTracking.UnitTests\DeliveryTracking.UnitTests.csproj", "{1FCFEAA2-FC06-44C5-BE4C-7B67AB23A601}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{EB2BB19D-5B7A-4B61-BE13-EFC900DFDE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB2BB19D-5B7A-4B61-BE13-EFC900DFDE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB2BB19D-5B7A-4B61-BE13-EFC900DFDE99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FCFEAA2-FC06-44C5-BE4C-7B67AB23A601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FCFEAA2-FC06-44C5-BE4C-7B67AB23A601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FCFEAA2-FC06-44C5-BE4C-7B67AB23A601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FCFEAA2-FC06-44C5-BE4C-7B67AB23A601}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
