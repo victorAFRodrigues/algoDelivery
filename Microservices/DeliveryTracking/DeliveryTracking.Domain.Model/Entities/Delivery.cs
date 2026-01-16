@@ -1,4 +1,5 @@
 ﻿using DeliveryTracking.Domain.Model.Enums;
+using DeliveryTracking.Domain.Model.Exceptions;
 using DeliveryTracking.Domain.Model.ValueObjects;
 
 namespace DeliveryTracking.Domain.Model.Entities;
@@ -18,7 +19,7 @@ public class Delivery
     public int TotalItems { get; private set; }
     
     public ContactPoint Sender { get; private set; }
-    public ContactPoint Receiver { get; private set; }
+    public ContactPoint Recipient { get; private set; }
     private readonly List<Item> _items = new();
     public IReadOnlyCollection<Item> Items => _items.AsReadOnly();
     private Delivery(){}
@@ -61,14 +62,20 @@ public class Delivery
         Status = DeliveryStatus.WaitingForCourier;
         PlacedAt = DateTimeOffset.Now;
     }
-    public void EditPreparationDetails(PreparationDetails details)
+    public void EditPreparationDetails(
+        PreparationDetails details,
+        DateTimeOffset now
+    )
     {
+        VerifyIfCanBeEdited();
+
         Sender = details.Sender;
-        Receiver = details.Receiver;
+        Recipient = details.Recipient;
         DistanceFee = details.DistanceFee;
         CourierPayout = details.CourierPayout;
-        ExpectedDeliveryAt = DateTimeOffset.UtcNow.Add(details.ExpectedDeliveryTime);
-        TotalCost = DistanceFee + details.CourierPayout;
+
+        ExpectedDeliveryAt = now + details.ExpectedDeliveryTime;
+        TotalCost = DistanceFee + CourierPayout;
     }
     public void PickUp(Guid courierId)
     {
@@ -96,11 +103,30 @@ public class Delivery
     public class PreparationDetails
     {
         public ContactPoint Sender { get; private set; }
-        public ContactPoint Receiver { get; private set; }
+        public ContactPoint Recipient { get; private set; }
         public decimal DistanceFee { get; private set; }
         public decimal CourierPayout { get; private set; }
-        public DateTimeOffset ExpectedDeliveryTime { get; private set; }
+        public TimeSpan ExpectedDeliveryTime { get; private set; }
         
+    }
+    
+    private void VerifyIfCanBePlaced() {
+        if (!IsFilled()) {
+            throw new DomainException();
+        }
+        if (!Status.Equals(DeliveryStatus.Draft)) {
+            throw new DomainException();
+        }
+    }
+
+    private void VerifyIfCanBeEdited() {
+        if (!Status.Equals(DeliveryStatus.Draft)) {
+            throw new DomainException();
+        }
+    }
+
+    private bool IsFilled() {
+        return Sender && Recipient && TotalCost > 0;
     }
     
 }
