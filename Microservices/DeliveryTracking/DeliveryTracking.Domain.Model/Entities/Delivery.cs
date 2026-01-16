@@ -112,7 +112,7 @@ public class Delivery
     }
     private void VerifyIfCanBeEdited() {
         if (!Status.Equals(DeliveryStatus.Draft)) {
-            throw new DomainException();
+            throw new DomainException("You can't edit a delivery that is not in Draft status.");
         }
     }
     private bool IsFilled()
