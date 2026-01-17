@@ -1,5 +1,6 @@
 ﻿using DeliveryTracking.Domain.Model.Entities;
 using DeliveryTracking.Domain.Model.Enums;
+using DeliveryTracking.Domain.Model.Exceptions;
 using DeliveryTracking.Domain.Model.ValueObjects;
 
 namespace DeliveryTracking.UnitTests;
@@ -20,10 +21,21 @@ public class DeliveryTests
     [Test]
     public void ShouldChangeStatusToPlaced()
     {
-        Delivery delivery = Delivery.Draft();
+        var delivery = Delivery.Draft();
         delivery.EditPreparationDetails(CreateValidPreparationDetails());
         delivery.Place();
         Assert.That(delivery.Status, Is.EqualTo(DeliveryStatus.WaitingForCourier));
 
     }
+    
+    [Test]
+    public void ShouldNotChangeToInvalidProcess()
+    {   
+        var validCourierId = Guid.NewGuid();
+        var delivery = Delivery.Draft();
+        delivery.EditPreparationDetails(CreateValidPreparationDetails());
+        
+        Assert.Throws(typeof(DomainException), () => delivery.PickUp(validCourierId));
+    }
+    
 }

@@ -76,19 +76,19 @@ public class Delivery
     public void Place()
     {
         VerifyIfCanBePlaced();
-        Status = DeliveryStatus.WaitingForCourier;
+        ChangeStatusTo(DeliveryStatus.WaitingForCourier);
         PlacedAt = DateTimeOffset.Now;
     }
     public void PickUp(Guid courierId)
     {
         CourierId = courierId;
-        Status = DeliveryStatus.InTransit;
+        ChangeStatusTo(DeliveryStatus.InTransit);
         AssignedAt = DateTimeOffset.Now;
     }
 
     public void MarkAsDelivered()
     {
-        Status = DeliveryStatus.Delivered;
+        ChangeStatusTo(DeliveryStatus.Delivered);
         FulfilledAt = DateTimeOffset.Now;
     }
     public static Delivery Draft()
@@ -118,6 +118,15 @@ public class Delivery
     private bool IsFilled()
     {
         return Sender is not null && Recipient is not null && TotalCost > 0;
+    }
+    
+    private void ChangeStatusTo(DeliveryStatus newStatus)
+    {
+        if (Status.CanNotChangeTo(newStatus))
+            throw new DomainException($"Invalid status transition from {Status} to {newStatus}");
+        
+        Status =  newStatus;
+        
     }
     
 }
