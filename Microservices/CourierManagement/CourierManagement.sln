@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierManagement.Domain.Model", "CourierManagement.Domain.Model\CourierManagement.Domain.Model.csproj", "{AAC16BC9-E70C-4E5C-854D-64F3430A1C23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierManagement.Infrastructure", "CourierManagement.Infrastructure\CourierManagement.Infrastructure.csproj", "{B0580529-295B-413D-8A2A-A9492BB47F3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierManagement.Api", "CourierManagement.Api\CourierManagement.Api.csproj", "{497A441C-8B2B-4630-A74B-93966DA06B0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{AAC16BC9-E70C-4E5C-854D-64F3430A1C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAC16BC9-E70C-4E5C-854D-64F3430A1C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAC16BC9-E70C-4E5C-854D-64F3430A1C23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0580529-295B-413D-8A2A-A9492BB47F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0580529-295B-413D-8A2A-A9492BB47F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0580529-295B-413D-8A2A-A9492BB47F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0580529-295B-413D-8A2A-A9492BB47F3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{497A441C-8B2B-4630-A74B-93966DA06B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{497A441C-8B2B-4630-A74B-93966DA06B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{497A441C-8B2B-4630-A74B-93966DA06B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{497A441C-8B2B-4630-A74B-93966DA06B0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
